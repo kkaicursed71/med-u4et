@@ -127,7 +127,6 @@ flowchart LR
 g++ myaso.cpp -o myaso
 ./myaso
 ```
-
 ---
 
 <p align="center"><em>Документ подготовлен на основе файла <code>u4et_medcart.docx</code>.</em></p>
