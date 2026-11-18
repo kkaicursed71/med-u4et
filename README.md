@@ -115,47 +115,7 @@ flowchart LR
 
 ```text
 med-u4et/
-├── README.md                  # описание проекта
-├── pyproject.toml             # метаданные и настройки пакета
-├── requirements.txt           # зависимости приложения
-├── requirements-dev.txt       # зависимости для разработки и тестов
-├── .env.example               # шаблон переменных окружения
-├── .editorconfig
-├── .gitignore
-├── data/                      # файл базы данных SQLite (не хранится в Git)
-├── docs/                      # документация проекта
-│   ├── architecture.md        # архитектура и схема БД
-│   ├── use-cases.md           # роли, сценарии, Use Case
-│   └── images/                # схемы и диаграммы
-│       ├── block-scheme-registration.png
-│       ├── block-scheme-card-update.png
-│       └── use-case-diagram.png
-├── examples/
-│   └── cpp/                   # демонстрационная программа на C++
-│       ├── myaso.cpp
-│       └── README.md
-├── scripts/
-│   ├── init_db.py             # создание схемы БД и администратора
-│   └── run.py                 # запуск сервера разработки
-├── src/
-│   └── medcard/
-│       ├── __init__.py        # фабрика приложения create_app()
-│       ├── config.py          # конфигурация
-│       ├── db.py              # подключение к SQLite
-│       ├── models/            # доменные модели
-│       ├── repositories/      # SQL-запросы к БД
-│       ├── services/          # бизнес-логика
-│       ├── routes/            # HTTP-маршруты (Flask blueprints)
-│       ├── templates/         # Jinja-шаблоны (HTML)
-│       ├── static/            # CSS и статические файлы
-│       ├── utils/             # валидаторы и безопасность
-│       └── sql/
-│           └── schema.sql     # схема базы данных
-└── tests/
-    ├── conftest.py
-    ├── test_app.py
-    ├── test_security.py
-    └── test_validators.py
+
 ```
 
 ### Назначение каталогов
