@@ -17,7 +17,7 @@
   - [Основные функции](#основные-функции)
   - [Архитектура и стек технологий](#архитектура-и-стек-технологий)
   - [Схема работы системы](#схема-работы-системы)
-  - [Содержимое репозитория](#содержимое-репозитория)
+  - [Структура проекта](#структура-проекта)
   - [Быстрый старт](#быстрый-старт)
 
 ---
@@ -111,22 +111,91 @@ flowchart LR
     C --> U
 ```
 
-## Содержимое репозитория
+## Структура проекта
 
-| Файл | Назначение |
+```text
+med-u4et/
+├── README.md                  # описание проекта
+├── pyproject.toml             # метаданные и настройки пакета
+├── requirements.txt           # зависимости приложения
+├── requirements-dev.txt       # зависимости для разработки и тестов
+├── .env.example               # шаблон переменных окружения
+├── .editorconfig
+├── .gitignore
+├── data/                      # файл базы данных SQLite (не хранится в Git)
+├── docs/                      # документация проекта
+│   ├── architecture.md        # архитектура и схема БД
+│   ├── use-cases.md           # роли, сценарии, Use Case
+│   └── images/                # схемы и диаграммы
+│       ├── block-scheme-registration.png
+│       ├── block-scheme-card-update.png
+│       └── use-case-diagram.png
+├── examples/
+│   └── cpp/                   # демонстрационная программа на C++
+│       ├── myaso.cpp
+│       └── README.md
+├── scripts/
+│   ├── init_db.py             # создание схемы БД и администратора
+│   └── run.py                 # запуск сервера разработки
+├── src/
+│   └── medcard/
+│       ├── __init__.py        # фабрика приложения create_app()
+│       ├── config.py          # конфигурация
+│       ├── db.py              # подключение к SQLite
+│       ├── models/            # доменные модели
+│       ├── repositories/      # SQL-запросы к БД
+│       ├── services/          # бизнес-логика
+│       ├── routes/            # HTTP-маршруты (Flask blueprints)
+│       ├── templates/         # Jinja-шаблоны (HTML)
+│       ├── static/            # CSS и статические файлы
+│       ├── utils/             # валидаторы и безопасность
+│       └── sql/
+│           └── schema.sql     # схема базы данных
+└── tests/
+    ├── conftest.py
+    ├── test_app.py
+    ├── test_security.py
+    └── test_validators.py
+```
+
+### Назначение каталогов
+
+| Путь | Назначение |
 | :--- | :--- |
-| `myaso.cpp` | Демонстрационное консольное приложение на **C++**, выводящее несколько текстовых строк в консоль |
-| `README.md` | Документация проекта в формате *Markdown* |
-| `u4et_medcart.docx` | Исходное описание проекта (хранится в родительском каталоге) |
+| `src/medcard/models` | Модели данных: **пользователь, пациент, медицинская карта, посещение, приём** |
+| `src/medcard/repositories` | Слой доступа к данным, только SQL-запросы |
+| `src/medcard/services` | Бизнес-правила: регистрация, ведение карты, расписание, отчёты |
+| `src/medcard/routes` | Контроллеры Flask по доменам: `auth`, `patients`, `cards`, `schedule`, `reports`, `admin` |
+| `src/medcard/templates` | HTML-представления (Jinja2) |
+| `docs` | [Архитектура](docs/architecture.md), [роли и сценарии](docs/use-cases.md), блок-схемы и Use Case-диаграмма |
+| `tests` | Модульные и прикладные тесты (`pytest`) |
+| `examples/cpp` | Демонстрационная C++ программа `myaso.cpp` |
 
 ## Быстрый старт
 
-Сборка и запуск демонстрационной C++ программы:
+```bash
+python -m venv .venv
+.venv\Scripts\activate          # Windows
+pip install -r requirements-dev.txt
+
+python scripts/init_db.py       # создаст data/medcard.db и администратора
+python scripts/run.py           # запустит сервер на http://127.0.0.1:5000
+```
+
+Запуск тестов:
 
 ```bash
+pytest
+```
+
+Демонстрационная программа на C++:
+
+```bash
+cd examples/cpp
 g++ myaso.cpp -o myaso
 ./myaso
 ```
+
 ---
 
 <p align="center"><em>Документ подготовлен на основе файла <code>u4et_medcart.docx</code>.</em></p>
